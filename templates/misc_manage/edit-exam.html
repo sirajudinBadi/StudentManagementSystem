@@ -1,0 +1,112 @@
+{% extends "home/base.html" %}
+{% load static %}
+{% block body %}
+
+
+<div class="page-wrapper">
+<div class="content container-fluid">
+
+<div class="page-header">
+<div class="row align-items-center">
+<div class="col">
+<h3 class="page-title">Edit Exam</h3>
+<ul class="breadcrumb">
+<li class="breadcrumb-item"><a href="{% url 'exam_list' %}">Exam</a></li>
+<li class="breadcrumb-item active">Edit Exam</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div class="row">
+<div class="col-sm-12">
+<div class="card">
+<div class="card-body">
+<form method="POST" enctype="multipart/form-data">
+  {% csrf_token %}
+<div class="row">
+<div class="col-12">
+<h5 class="form-title"><span>Exam Information</span></h5>
+</div>
+<div class="col-12 col-sm-6">
+<div class="form-group">
+<label>Exam ID</label>
+<input type="text" name="exam_id" class="form-control" value="{{exam.exam_id}}">
+</div>
+</div>
+<div class="col-12 col-sm-6">
+<div class="form-group">
+<label>Exam Name</label>
+<input type="text" name="exam_name" class="form-control" value="{{exam.exam_name}}">
+</div>
+</div>
+<div class="col-12 col-sm-6">
+<div class="form-group">
+<label>Class</label>
+<select name="exam_class" class="form-control">
+<option value="LKG" {% if exam.exam_class == 'LKG' %}selected{% endif %}>LKG</option>
+<option value="UKG" {% if exam.exam_class == "UKG" %}selected{% endif %}>UKG</option>
+<option value="1" {% if exam.exam_class == "1" %}selected{% endif %}>1</option>
+<option value="2" {% if exam.exam_class == "2" %}selected{% endif %}>2</option>
+<option value="3" {% if exam.exam_class == "3" %}selected{% endif %}>3</option>
+<option value="4" {% if exam.exam_class == "4" %}selected{% endif %}>4</option>
+<option value="5" {% if exam.exam_class == "5" %}selected{% endif %}>5</option>
+<option value="6" {% if exam.exam_class == "6" %}selected{% endif %}>6</option>
+<option value="7" {% if exam.exam_class == "7" %}selected{% endif %}>7</option>
+<option value="8" {% if exam.exam_class == "8" %}selected{% endif %}>8</option>
+<option value="9" {% if exam.exam_class == "9" %}selected{% endif %}>9</option>
+<option value="10" {% if exam.exam_class == "10" %}selected{% endif %}>10</option>
+
+</select>
+</div>
+</div>
+<div class="col-12 col-sm-6">
+<div class="form-group">
+<label>Subject</label>
+<input type="text" name="subject" class="form-control" value="{{exam.subject}}">
+</div>
+</div>
+
+<div class="col-12 col-sm-6">
+<div class="form-group">
+<label>Start Time</label>
+<input type="time" name="exam_start_time" class="form-control" value="{{exam.exam_start_time}}">
+</div>
+</div>
+<div class="col-12 col-sm-6">
+<div class="form-group">
+<label>End Time</label>
+<input type="time" name="exam_end_time" class="form-control" value="{{exam.exam_end_time}}">
+</div>
+</div>
+<div class="col-12 col-sm-6">
+<div class="form-group">
+<label>Event Date</label>
+<input type="date" name="exam_date" class="form-control" value="{{exam.exam_date}}">
+</div>
+</div>
+<div class="col-12">
+<button type="submit" class="btn btn-primary">Submit</button>
+</div>
+</div>
+</form>
+</div>
+ </div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+
+
+<script src="{% static 'assets/js/jquery-3.6.0.min.js' %}"></script>
+<script src="{% static 'assets/js/popper.min.js' %}"></script>
+<script src="{% static 'assets/plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'assets/plugins/slimscroll/jquery.slimscroll.min.js' %}"></script>
+<script src="{% static 'assets/js/script.js' %}"></script>
+</body>
+
+<!-- Mirrored from preschool.dreamguystech.com/html-template/edit-exam.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 28 Oct 2021 11:12:21 GMT -->
+</html>
+{% endblock  %}

@@ -1,0 +1,84 @@
+
+{% extends "home/base.html" %}
+{% load static %}
+{% block body %}
+
+
+
+<div class="page-wrapper">
+<div class="content container-fluid">
+
+<div class="page-header">
+<div class="row align-items-center">
+<div class="col">
+<h3 class="page-title">Edit Sports</h3>
+<ul class="breadcrumb">
+<li class="breadcrumb-item"><a href="{% url 'view_sports' %}">Sports</a></li>
+<li class="breadcrumb-item active">Edit Sports</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div class="row">
+<div class="col-sm-12">
+<div class="card">
+<div class="card-body">
+<form method="POST">
+  {% csrf_token %}
+<div class="row">
+<div class="col-12">
+<h5 class="form-title"><span>Sports Information</span></h5>
+</div>
+<div class="col-12 col-sm-6">
+<div class="form-group">
+<label>Sports ID</label>
+<input type="text" name="sports_id" class="form-control" value="{{sport.sports_id}}">
+</div>
+</div>
+<div class="col-12 col-sm-6">
+<div class="form-group">
+<label>Sports Name</label>
+<input type="text" name="sports_name" class="form-control" value="{{sport.sports_name}}">
+</div>
+</div>
+<div class="col-12 col-sm-6">
+<div class="form-group">
+<label>Coach Name</label>
+<input type="text" name="coach_name" class="form-control" value="{{sport.coach_name}}">
+</div>
+</div>
+<div class="col-12 col-sm-6">
+<div class="form-group">
+<label>Started Year</label>
+<input type="date" name="start_year" class="form-control" value="{{sport.start_year}}">
+</div>
+</div>
+<div class="col-12">
+<button type="submit" class="btn btn-primary">Submit</button>
+</div>
+</div>
+</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+
+
+<script src="{% static 'assets/js/jquery-3.6.0.min.js' %}"></script>
+
+<script src="{% static 'assets/js/popper.min.js' %}"></script>
+<script src="{% static 'assets/plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+
+<script src="{% static 'assets/plugins/slimscroll/jquery.slimscroll.min.js' %}"></script>
+
+<script src="{% static 'assets/js/script.js' %}"></script>
+</body>
+
+<!-- Mirrored from preschool.dreamguystech.com/html-template/edit-sports.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 28 Oct 2021 11:12:21 GMT -->
+</html>
+{% endblock %}

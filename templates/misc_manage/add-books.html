@@ -1,0 +1,126 @@
+{% extends "home/base.html" %}
+{% load static %}
+{% block body %}
+
+
+
+<div class="page-wrapper">
+<div class="content container-fluid">
+
+<div class="page-header">
+<div class="row align-items-center">
+<div class="col">
+<h3 class="page-title">Add Books</h3>
+<ul class="breadcrumb">
+<li class="breadcrumb-item"><a href="{% url 'view_books' %}">Library</a></li>
+<li class="breadcrumb-item active">Add Books</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div class="row">
+<div class="col-sm-12">
+<div class="card">
+<div class="card-body">
+<form method="POST" action="{% url 'add_book' %}">
+  {% csrf_token %}
+<div class="row">
+<div class="col-12">
+<h5 class="form-title"><span>Book Information</span></h5>
+</div>
+<div class="col-12 col-sm-6">
+<div class="form-group">
+<label>Book ID</label>
+<input type="text" name="book_id" class="form-control" required>
+</div>
+</div>
+<div class="col-12 col-sm-6">
+<div class="form-group">
+<label>Book Name</label>
+<input type="text" name="book_name" class="form-control" required>
+</div>
+</div>
+<div class="col-12 col-sm-6">
+<div class="form-group">
+<label>Language</label>
+<select name="language" class="form-control" required>
+<option value="">Select Language</option>
+<option value="English">English</option>
+<option value="Hindi">Hindi</option>
+<option value="Gujarati">Gujarati</option>
+</select>
+</div>
+</div>
+
+<div class="col-12 col-sm-6">
+<div class="form-group">
+<label>Class</label>
+<select name="book_class" class="form-control" required>
+<option value = "" >Select Class</option>
+<option value = "LKG" >LKG</option>
+<option value = "UKG" >UKG</option>
+<option value = "1" >1</option>
+<option value = "2" >2</option>
+<option value = "3" >3</option>
+<option value = "4" >4</option>
+<option value = "5" >5</option>
+<option value = "6" >6</option>
+<option value = "7" >7</option>
+<option value = "8" >8</option>
+<option value = "9" >9</option>
+<option value = "10" >10</option>
+</select>
+</div>
+</div>
+<div class="col-12 col-sm-6">
+<div class="form-group">
+<label>Article Type</label>
+<select name="article_type" class="form-control" required>
+<option value = "" >Select Type</option>
+<option value = "Book" >Book</option>
+<option value = "DVD" >DVD</option>
+<option value = "CD" >CD</option>
+<option value = "Newspaper" >Newspaper</option>
+<option value = "Magazine" >Magazine</option>
+</select>
+</div>
+</div>
+<div class="col-12 col-sm-6">
+<div class="form-group">
+<label>Status</label>
+<select name = "book_status" class="form-control" required>
+<option value = "" >Select Status</option>
+<option value = "In Stock" >In Stock</option>
+<option value = "Out of Stock" >Out of Stock</option>
+</select>
+</div>
+</div>
+<div class="col-12">
+<button type="submit" class="btn btn-primary">Submit</button>
+</div>
+</div>
+</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+
+
+<script src="{% static 'assets/js/jquery-3.6.0.min.js' %}"></script>
+
+<script src="{% static 'assets/js/popper.min.js' %}"></script>
+<script src="{% static 'assets/plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+
+<script src="{% static 'assets/plugins/slimscroll/jquery.slimscroll.min.js' %}"></script>
+
+<script src="{% static 'assets/js/script.js' %}"></script>
+</body>
+
+<!-- Mirrored from preschool.dreamguystech.com/html-template/add-books.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 28 Oct 2021 11:12:21 GMT -->
+</html>
+{% endblock  %}

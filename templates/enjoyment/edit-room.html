@@ -1,0 +1,102 @@
+{% extends "home/base.html" %}
+{% load static %}
+{% block body %}
+
+
+
+<div class="page-wrapper">
+<div class="content container-fluid">
+
+<div class="page-header">
+<div class="row align-items-center">
+<div class="col">
+<h3 class="page-title">Edit Rooms</h3>
+<ul class="breadcrumb">
+<li class="breadcrumb-item"><a href="{% url 'view_hostel' %}">Hostel</a></li>
+<li class="breadcrumb-item active">Edit Rooms</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div class="row">
+<div class="col-sm-12">
+<div class="card">
+<div class="card-body">
+<form method='POST'>
+  {% csrf_token %}
+<div class="row">
+<div class="col-12">
+<h5 class="form-title"><span>Room Information</span></h5>
+</div>
+<div class="col-12 col-sm-6">
+<div class="form-group">
+<label>Block</label>
+<input type="text" name="block" class="form-control" value="{{room.block}}">
+</div>
+</div>
+<div class="col-12 col-sm-6">
+<div class="form-group">
+<label>Room No</label>
+<input type="text" name="room_no" class="form-control" value="{{room.room_no}}">
+</div>
+</div>
+<div class="col-12 col-sm-6">
+<div class="form-group">
+<label>Room Type</label>
+<select name="room_type" class="form-control">
+<option value="Normal" {% if room.room_type == "Normal" %} selected {% endif %}>Normal</option>
+<option value="AC" {% if room.room_type == "AC" %} selected {% endif %}>AC</option>
+<option value="Suite" {% if room.room_type == "Suite" %} selected {% endif %}>Suite</option>
+</select>
+</div>
+</div>
+<div class="col-12 col-sm-6">
+<div class="form-group">
+<label>No of Beds</label>
+<input type="text" name="no_of_beds" class="form-control" value="{{room.no_of_beds}}">
+</div>
+</div>
+<div class="col-12 col-sm-6">
+<div class="form-group">
+<label>Cost per Bed</label>
+<input type="text" name="cost_per_bed" class="form-control" value="{{room.cost_per_bed}}">
+</div>
+</div>
+<div class="col-12 col-sm-6">
+<div class="form-group">
+<label>Availability</label>
+<select name="room_status" class="form-control">
+<option value = "Available" {% if room.room_status == "Available" %} selected {% endif %}>Available</option>
+<option value = "Full" {% if room.room_status == "Full" %} selected {% endif %}>Full</option>
+</select>
+</div>
+</div>
+<div class="col-12">
+<button type="submit" class="btn btn-primary">Submit</button>
+</div>
+</div>
+</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+
+
+<script src="{% static 'assets/js/jquery-3.6.0.min.js' %}"></script>
+
+<script src="{% static 'assets/js/popper.min.js' %}"></script>
+<script src="{% static 'assets/plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+
+<script src="{% static 'assets/plugins/slimscroll/jquery.slimscroll.min.js' %}"></script>
+
+<script src="{% static 'assets/js/script.js' %}"></script>
+</body>
+
+<!-- Mirrored from preschool.dreamguystech.com/html-template/edit-room.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 28 Oct 2021 11:12:21 GMT -->
+</html>
+{% endblock %}

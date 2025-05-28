@@ -1,0 +1,357 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=0"
+    />
+    <title>Preskool - Dashboard</title>
+    <link rel="shortcut icon" href="{% static 'assets/img/favicon.png' %}" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;0,600;0,700;1,400&amp;display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static 'assets/plugins/bootstrap/css/bootstrap.min.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static 'assets/plugins/fontawesome/css/fontawesome.min.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static 'assets/plugins/fontawesome/css/all.min.css' %}"
+    />
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}" />
+  </head>
+  <body>
+    <div class="main">
+      <div class="header">
+        <div class="header-left">
+          <a href="{% url 'dashboard' %}" class="logo">
+            <img src="{% static 'assets/img/logo.png' %}" alt="Logo" />
+          </a>
+          <a href="{% url 'dashboard' %}" class="logo logo-small">
+            <img
+              src="{% static 'assets/img/logo-small.png' %}"
+              alt="Logo"
+              width="30"
+              height="30"
+            />
+          </a>
+        </div>
+        <a href="javascript:void(0);" id="toggle_btn">
+          <i class="fas fa-align-left"></i>
+        </a>
+        <div class="top-nav-search">
+          <form>
+            <input type="text" class="form-control" placeholder="Search here" />
+            <button class="btn" type="submit">
+              <i class="fas fa-search"></i>
+            </button>
+          </form>
+        </div>
+        <a class="mobile_btn" id="mobile_btn">
+          <i class="fas fa-bars"></i>
+        </a>
+        <ul class="nav user-menu">
+          <li class="nav-item dropdown noti-dropdown">
+            <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+              <i class="far fa-bell"></i>
+              <span class="badge badge-pill">3</span>
+            </a>
+            <div class="dropdown-menu notifications">
+              <div class="topnav-dropdown-header">
+                <span class="notification-title">Notifications</span>
+                <a href="javascript:void(0)" class="clear-noti"> Clear All </a>
+              </div>
+              <div class="noti-content">
+                <ul class="notification-list">
+                  <li class="notification-message">
+                    <a href="#">
+                      <div class="media">
+                        <span class="avatar avatar-sm">
+                          <img
+                            class="avatar-img rounded-circle"
+                            alt="User Image"
+                            src="{% static 'assets/img/profiles/user.png' %}"
+                          />
+                        </span>
+                        <div class="media-body">
+                          <p class="noti-details">
+                            <span class="noti-title">Carlson Tech</span> has
+                            approved
+                            <span class="noti-title">your estimate</span>
+                          </p>
+                          <p class="noti-time">
+                            <span class="notification-time">4 mins ago</span>
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li class="notification-message">
+                    <a href="#">
+                      <div class="media">
+                        <span class="avatar avatar-sm">
+                          <img
+                            class="avatar-img rounded-circle"
+                            alt="User Image"
+                            src="{% static 'assets/img/profiles/user.png' %}"
+                          />
+                        </span>
+                        <div class="media-body">
+                          <p class="noti-details">
+                            <span class="noti-title"
+                              >International Software Inc</span
+                            >
+                            has sent you a invoice in the amount of
+                            <span class="noti-title">$218</span>
+                          </p>
+                          <p class="noti-time">
+                            <span class="notification-time">6 mins ago</span>
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li class="notification-message">
+                    <a href="#">
+                      <div class="media">
+                        <span class="avatar avatar-sm">
+                          <img
+                            class="avatar-img rounded-circle"
+                            alt="User Image"
+                            src="{% static 'assets/img/profiles/avatar-17.jpg' %}"
+                          />
+                        </span>
+                        <div class="media-body">
+                          <p class="noti-details">
+                            <span class="noti-title">John Hendry</span> sent a
+                            cancellation request
+                            <span class="noti-title">Apple iPhone XR</span>
+                          </p>
+                          <p class="noti-time">
+                            <span class="notification-time">8 mins ago</span>
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li class="notification-message">
+                    <a href="#">
+                      <div class="media">
+                        <span class="avatar avatar-sm">
+                          <img
+                            class="avatar-img rounded-circle"
+                            alt="User Image"
+                            src="{% static 'assets/img/profiles/avatar-13.jpg' %}"
+                          />
+                        </span>
+                        <div class="media-body">
+                          <p class="noti-details">
+                            <span class="noti-title">Mercury Software Inc</span>
+                            added a new product
+                            <span class="noti-title">Apple MacBook Pro</span>
+                          </p>
+                          <p class="noti-time">
+                            <span class="notification-time">12 mins ago</span>
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <div class="topnav-dropdown-footer">
+                <a href="#">View all Notifications</a>
+              </div>
+            </div>
+          </li>
+          <li class="nav-item dropdown has-arrow">
+            <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+              <span class="user-img"
+                ><img
+                  class="rounded-circle"
+                  src="{% static 'assets/img/profiles/user.png' %}"
+                  width="31"
+                  alt="{{user.first_name}} {{user.last_name}}"
+              /></span>
+            </a>
+            <div class="dropdown-menu">
+              <div class="user-header">
+                <div class="avatar avatar-sm">
+                  <img
+                    src="{% static 'assets/img/profiles/user.png' %}"
+                    alt="User Image"
+                    class="avatar-img rounded-circle"
+                  />
+                </div>
+                <div class="user-text">
+                  <h6>{{user.first_name|capfirst}}</h6>
+                  <p class="text-muted mb-0">{{user.role|capfirst}}</p>
+                </div>
+              </div>
+              {% comment %}
+              <a
+                class="dropdown-item"
+                href="{% url 'get_profile' profile.slug %}"
+                >My Profile</a
+              >
+              {% endcomment %}
+              <a class="dropdown-item" href="inbox.html">Inbox</a>
+              <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="sidebar" id="sidebar">
+        <div class="sidebar-inner slimscroll">
+          <div id="sidebar-menu" class="sidebar-menu">
+            <ul>
+              {% if user.role|lower == "admin" %}
+              <li class="menu-title">
+                <span>Main Menu</span>
+              </li>
+              <li class="submenu">
+                <a href="{% url 'dashboard' %}"
+                  ><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span>
+                  <span class="menu-arrow"></span
+                ></a>
+                <ul>
+                  {% comment %}
+                  <li><a href="{% url 'student_list' %}">Student List</a></li>
+                  {% endcomment %} {% comment %}
+                  <li><a href="{% url 'add_student' %}">Student Add</a></li>
+                  {% endcomment %} {% comment %}
+                  <li><a href="{% url 'add_result' %}">Add Result</a></li>
+                  {% endcomment %}
+                  <li>
+                    <a href="{% url 'add_activity' %}">Create Activity</a>
+                  </li>
+
+                  <li><a href="{% url 'view_events' %}">Events</a></li>
+                  <li><a href="{% url 'view_happenings' %}">Happenings</a></li>
+
+                  <li>
+                    <a href="{% url 'add_announcement' %}"
+                      >Make Announcements</a
+                    >
+                  </li>
+                </ul>
+              </li>
+
+              <li class="submenu">
+                <a href="{% url 'dashboard' %}"
+                  ><i class="fas fa-user-graduate"></i> <span> Students</span>
+                  <span class="menu-arrow"></span
+                ></a>
+                <ul>
+                  <li><a href="{% url 'student_list' %}">Student List</a></li>
+                  <li><a href="{% url 'view_results' %}">Results</a></li>
+                </ul>
+              </li>
+              <li class="submenu">
+                <a href="{% url 'dashboard' %}"
+                  ><i class="fas fa-chalkboard-teacher"></i>
+                  <span> Teachers</span> <span class="menu-arrow"></span
+                ></a>
+                <ul>
+                  <li><a href="{% url 'teacher_list' %}">Teacher List</a></li>
+                  <li>
+                    <a href="{% url 'view_spl_sessions' %}">Special Sessions</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="menu-title">
+                <span>Management</span>
+              </li>
+              <li class="submenu">
+                <a href="#"
+                  ><i class="fas fa-file-invoice-dollar"></i>
+                  <span> Accounts</span> <span class="menu-arrow"></span
+                ></a>
+                <ul>
+                  <li>
+                    <a href="{% url 'fees_collection_list' %}"
+                      >Fees Collection</a
+                    >
+                  </li>
+                  <li><a href="{% url 'salary_list' %}">Salary</a></li>
+                </ul>
+              </li>
+              {% endif %} {% if user.role == "teacher" %}
+              <li>
+                <a href="{% url 'view_lessons' %}"
+                  ><i class="fas fa-chalkboard-teacher"></i>
+                  <span>Lectures</span></a
+                >
+              </li>
+              {% endif %}
+
+              <li>
+                <a href="{% url 'holiday_list' %}"
+                  ><i class="fas fa-holly-berry"></i> <span>Holiday</span></a
+                >
+              </li>
+              {% comment %}
+              <li>
+                <a href="fees.html"
+                  ><i class="fas fa-comment-dollar"></i> <span>Fees</span></a
+                >
+              </li>
+              {% endcomment %}
+              <li>
+                <a href="{% url 'exam_list' %}"
+                  ><i class="fas fa-clipboard-list"></i>
+                  <span>Exam list</span></a
+                >
+              </li>
+              {% comment %}
+              <li>
+                <a href="event.html"
+                  ><i class="fas fa-calendar-day"></i> <span>Events</span></a
+                >
+              </li>
+              {% endcomment %}
+              <li>
+                <a href="{% url 'timetable_list' %}"
+                  ><i class="fas fa-table"></i> <span>Time Table</span></a
+                >
+              </li>
+              <li>
+                <a href="{% url 'view_books' %}"
+                  ><i class="fas fa-book"></i> <span>Library</span></a
+                >
+              </li>
+
+              <li class="menu-title">
+                <span>Others</span>
+              </li>
+              <li>
+                <a href="{% url 'view_sports' %}"
+                  ><i class="fas fa-baseball-ball"></i> <span>Sports</span></a
+                >
+              </li>
+              <li>
+                <a href="{% url 'view_hostel' %}"
+                  ><i class="fas fa-hotel"></i> <span>Hostel</span></a
+                >
+              </li>
+              <li>
+                <a href="{% url 'view_transport' %}"
+                  ><i class="fas fa-bus"></i> <span>Transport</span></a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% block body %}{% endblock %}
+  </body>
+</html>

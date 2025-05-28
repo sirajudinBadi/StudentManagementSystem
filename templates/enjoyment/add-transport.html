@@ -1,0 +1,95 @@
+
+{% extends "home/base.html" %}
+{% load static %}
+{% block body %}
+
+
+<div class="page-wrapper">
+<div class="content container-fluid">
+
+<div class="page-header">
+<div class="row align-items-center">
+<div class="col">
+<h3 class="page-title">Add Transport</h3>
+<ul class="breadcrumb">
+<li class="breadcrumb-item"><a href="{% url 'view_transport' %}">Transport</a></li>
+<li class="breadcrumb-item active">Add Transport</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div class="row">
+<div class="col-sm-12">
+<div class="card">
+<div class="card-body">
+<form method="POST" action="{% url 'add_transport' %}">
+  {% csrf_token %}
+<div class="row">
+<div class="col-12">
+<h5 class="form-title"><span>Transport Information</span></h5>
+</div>
+<div class="col-12 col-sm-6">
+<div class="form-group">
+<label>Route Name</label>
+<input type="text" name="route_name" class="form-control" required>
+</div>
+</div>
+<div class="col-12 col-sm-6">
+<div class="form-group">
+<label>Vehicle Number</label>
+<input type="text" name="vehicle_num" class="form-control" required>
+</div>
+</div>
+<div class="col-12 col-sm-6">
+<div class="form-group">
+<label>Driver Name</label>
+<input type="text" name="driver_name" class="form-control" required>
+</div>
+</div>
+<div class="col-12 col-sm-6">
+<div class="form-group">
+<label>License Number</label>
+<input type="text" name="license_num" class="form-control" required>
+</div>
+</div>
+<div class="col-12 col-sm-6">
+<div class="form-group">
+<label>Contact Number</label>
+<input type="text" name="driver_mobile" class="form-control" required>
+</div>
+</div>
+<div class="col-12 col-sm-6">
+<div class="form-group">
+<label>Driver Address</label>
+<input type="text" name="driver_address" class="form-control" required>
+</div>
+</div>
+<div class="col-12">
+<button type="submit" class="btn btn-primary">Submit</button>
+</div>
+</div>
+</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+
+
+<script src="assets/js/jquery-3.6.0.min.js"></script>
+
+<script src="assets/js/popper.min.js"></script>
+<script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+
+<script src="assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+<script src="assets/js/script.js"></script>
+</body>
+
+<!-- Mirrored from preschool.dreamguystech.com/html-template/add-transport.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 28 Oct 2021 11:12:21 GMT -->
+</html>
+{% endblock %}

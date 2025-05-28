@@ -1,0 +1,941 @@
+{% extends "home/base.html" %} {% load static %} 
+
+{% block body %}
+{% if user.role|lower == 'admin' %}
+
+      <div class="page-wrapper">
+        <div class="content container-fluid">
+          <div class="page-header">
+            <div class="row">
+              <div class="col-sm-12">
+                <h3 class="page-title">Welcome {{user.role|capfirst}}!</h3>
+                <ul class="breadcrumb">
+                  <li class="breadcrumb-item active">Dashboard</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xl-3 col-sm-6 col-12 d-flex">
+              <div class="card bg-one w-100">
+                <div class="card-body">
+                  <div
+                    class="db-widgets d-flex justify-content-around align-items-center"
+                  >
+                    <div class="db-icon">
+                      <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <div class="db-info">
+                      <h3>{{student_count}}</h3>
+                      <h6>Students</h6>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col-xl-3 col-sm-6 col-12 d-flex">
+              <div class="card bg-three w-100">
+                <div class="card-body">
+                  <div
+                    class="db-widgets d-flex justify-content-around align-items-center"
+                  >
+                    <div class="db-icon">
+                      <i class="fas fa-chalkboard-teacher"></i>
+                    </div>
+                    <div class="db-info">
+                      <h3>{{ teacher_count }}</h3>
+                      <h6>Teachers</h6>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-sm-6 col-12 d-flex">
+              <div class="card bg-two w-100">
+                <div class="card-body">
+                  <div
+                    class="db-widgets d-flex justify-content-around align-items-center"
+                  >
+                    <div class="db-icon">
+                      <i class="fas fa-rupee-sign"> </i>
+                    </div>
+                    <div class="db-info">
+                      <h3>{{expense}}</h3>
+                      <h6>Expense</h6>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-sm-6 col-12 d-flex">
+              <div class="card bg-four w-100">
+                <div class="card-body">
+                  <div
+                    class="db-widgets d-flex justify-content-around align-items-center"
+                  >
+                    <div class="db-icon">
+                      {% comment %} <i class="fas fa-file-invoice-dollar"></i> {% endcomment %}
+                      <i class="fas fa-rupee-sign"></i>
+                    </div>
+                    <div class="db-info">
+                      <h3>{{revenue}}</h3>
+                      <h6>Revenue</h6>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 col-lg-6">
+              <div class="card card-chart">
+                <div class="card-header">
+                  <div class="row align-items-center">
+                    <div class="col-12 text-center">
+                      <h5 class="card-title">Students per Class</h5>
+                    </div>
+                    {% comment %} <div class="col-6">
+                      <ul class="list-inline-group text-right mb-0 pl-0">
+                        <li class="list-inline-item">
+                          <div class="form-group mb-0 amount-spent-select">
+                            <select class="form-control form-control-sm">
+                              <option>Today</option>
+                              <option>Last Week</option>
+                              <option>Last Month</option>
+                            </select>
+                          </div>
+                        </li>
+                      </ul>
+                    </div> {% endcomment %}
+                  </div>
+                </div>
+                <div class="card-body">
+                  <div id="apexcharts-area"></div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12 col-lg-6">
+              <div class="card card-chart">
+                <div class="card-header">
+                  <div class="row align-items-center">
+                    <div class="col-12 text-center">
+                      <h5 class="card-title">Student Distribution by Gender</h5>
+                    </div>
+                    {% comment %} <div class="col-6">
+                      <ul class="list-inline-group text-right mb-0 pl-0">
+                        <li class="list-inline-item">
+                          <div class="form-group mb-0 amount-spent-select">
+                            <select class="form-control form-control-sm">
+                              <option>Today</option>
+                              <option>Last Week</option>
+                              <option>Last Month</option>
+                            </select>
+                          </div>
+                        </li>
+                      </ul>
+                    </div> {% endcomment %}
+                  </div>
+                </div>
+                <div class="card-body">
+                  <div id="pie-chart"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 d-flex">
+              <div class="card flex-fill">
+                <div class="card-header">
+                  <h5 class="card-title">Star Students</h5>
+                </div>
+                <div class="card-body">
+                  <div class="table-responsive overflow-auto h-100" style="max-height: 300px;"> 
+                 {% comment %} <div class="card-body">
+                  <div class="table-responsive">  {% endcomment %}
+                    <table class="table table-hover table-center">
+                      <thead class="thead-light">
+                        <tr>
+                          <th>ID</th>
+                          <th>Name</th>
+                          <th class="text-center">Marks</th>
+                          <th class="text-center">Percentage</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for star in star_students %}
+                        <tr>
+                          <td class="text-nowrap">
+                            <div>{{star.student_id}}</div>
+                          </td>
+                          <td class="text-nowrap">{{star.name}}</td>
+                          <td class="text-center">{{star.marks}}/700</td>
+                          <td class="text-center">{{star.percentage}}%</td>
+                        </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 d-flex">
+              <div class="card flex-fill">
+                <div class="card-header d-flex justify-content-between">
+                  <h5 class="card-title">Student Activity</h5>
+                  <a href="{% url 'add_activity' %}" class="btn btn-primary"><i class="fas fa-plus"></i></a>
+                </div>
+                <div class="card-body">
+                  <ul class="activity-feed">
+                    {% for activity in student_activities %}
+                    <li class="feed-item">
+                      {{student_activities.description}}
+                      <div class="feed-date">{{activity.created_at|date:"M d"}}</div>
+                      <span class="feed-text"
+                        ><a>{{activity.name}}</a> {{activity.description}} <a>"{{activity.event}}"</a></span
+                      >
+                    </li>
+                    {% endfor %}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xl-3 col-sm-6 col-12">
+              <div class="card flex-fill fb sm-box">
+                <i class="fab fa-facebook mb-4"></i>
+                <h6>50,095</h6>
+                <p>Likes</p>
+              </div>
+            </div>
+            <div class="col-xl-3 col-sm-6 col-12">
+              <div class="card flex-fill twitter sm-box">
+                <i class="fab fa-twitter mb-4"></i>
+                <h6>48,596</h6>
+                <p>Follows</p>
+              </div>
+            </div>
+            <div class="col-xl-3 col-sm-6 col-12">
+              <div class="card flex-fill insta sm-box ">
+                <i class="fab fa-instagram mb-4"></i>
+                <h6>52,085</h6>
+                <p>Follows</p>
+              </div>
+            </div>
+            <div class="col-xl-3 col-sm-6 col-12">
+              <div class="card flex-fill linkedin sm-box">
+                <i class="fab fa-linkedin-in mb-4"></i>
+                <h6>69,050</h6>
+                <p>Follows</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <footer>
+          <p>Copyright © 2025 Dreamguys.</p>
+        </footer>
+      </div>
+    </div>
+    {% comment %} ADMIN PANEL STATIC {% endcomment %}
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="{% static 'assets/plugins/apexchart/apexcharts.min.js' %}"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Area Chart (Revenue)
+        var options1 = {
+          chart: {
+            type: "area",
+            height: 250
+          },
+          series: [{
+            name: "Count",
+            data: {{class_count|safe}}
+          }],
+          xaxis: {
+            categories: {{ classes|safe}}
+          }
+        };
+    
+        var chart1 = new ApexCharts(document.querySelector("#apexcharts-area"), options1);
+        chart1.render();
+    
+        // Bar Chart (Number of Students)
+        // Pie Chart (Gender Distribution)
+        var options2 = {
+          chart: {
+            type: 'pie',
+            height: 250
+          },
+          series: {{ gender_count|safe }},
+          labels: {{ genders|safe }},
+          colors: ['#EC6B56', '#FFC154', '#47B39C'],
+          dataLabels: {
+            style: {
+              fontSize: '16px',
+              colors : ["#fff"]
+            }
+          },
+        };
+
+        var chart2 = new ApexCharts(document.querySelector("#pie-chart"), options2);
+        chart2.render();
+      });
+    </script>
+    
+    {% comment %} <script>
+      const classes = {{ classes|safe }};
+      const classCounts = {{ class_counts|safe }};
+    
+      document.addEventListener("DOMContentLoaded", function () {
+        var options = {
+          chart: { type: 'bar', height: 350 },
+          series: [{ name: 'Students', data: classCounts }],
+          xaxis: { categories: classes },
+        };
+    
+        var chart = new ApexCharts(document.querySelector("#apexcharts-area"), options);
+        chart.render();
+      });
+    </script> {% endcomment %}
+
+    <script src="{% static 'assets/js/jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static 'assets/js/popper.min.js' %}"></script>
+    <script src="{% static 'assets/plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'assets/plugins/slimscroll/jquery.slimscroll.min.js' %}"></script>
+    {% comment %} <script src="{% static 'assets/plugins/apexchart/chart-data.js' %}"></script> {% endcomment %}
+    <script src="{% static 'assets/js/script.js' %}"></script>
+  </body>
+</html>
+
+{% elif user.role == "Student" %}
+<div class="page-wrapper">
+  <div class="content container-fluid">
+  
+  <div class="page-header">
+  <div class="row">
+  <div class="col-sm-12">
+  <h3 class="page-title">Welcome {{user.first_name}}!</h3>
+  <ul class="breadcrumb">
+  <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+  <li class="breadcrumb-item active">Student Dashboard</li>
+  </ul>
+  </div>
+  </div>
+  </div>
+  
+  
+  
+  <div class="row">
+  <div class="col-xl-3 col-sm-6 col-12 d-flex">
+  <div class="card bg-nine w-100">
+  <div class="card-body">
+  <div class="db-widgets d-flex justify-content-between align-items-center">
+  <div class="db-icon">
+  <i class="fas fa-book-open"></i>
+  </div>
+  <div class="db-info">
+  <h3>04/06</h3>
+  <h6>All Courses</h6>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  <div class="col-xl-3 col-sm-6 col-12 d-flex">
+  <div class="card bg-six w-100">
+  <div class="card-body">
+  <div class="db-widgets d-flex justify-content-between align-items-center">
+  <div class="db-icon">
+  <i class="fas fa-file-alt"></i>
+  </div>
+  <div class="db-info">
+  <h3>40/60</h3>
+  <h6>All Projects</h6>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  <div class="col-xl-3 col-sm-6 col-12 d-flex">
+  <div class="card bg-ten w-100">
+  <div class="card-body">
+  <div class="db-widgets d-flex justify-content-between align-items-center">
+  <div class="db-icon">
+  <i class="fas fa-clipboard-list"></i>
+  </div>
+  <div class="db-info">
+  <h3>30/50</h3>
+  <h6>Test Attended</h6>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  <div class="col-xl-3 col-sm-6 col-12 d-flex">
+  <div class="card bg-eleven w-100">
+  <div class="card-body">
+  <div class="db-widgets d-flex justify-content-between align-items-center">
+  <div class="db-icon">
+  <i class="fas fa-clipboard-check"></i>
+  </div>
+  <div class="db-info">
+  <h3>15/20</h3>
+  <h6>Test Passed</h6>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+
+  
+
+
+ <div class="row">
+  <div class="col-12 col-lg-12 col-xl-9">
+    <div class="card flex-fill">
+      <div class="card-header bg-info-light">
+        <div class="row align-items-center">
+          <div class="col-6">
+            
+            <h5 class="card-title font-weight-bold">Today’s Special Sessions</h5>
+          </div>
+          <div class="col-6">
+            <span class="float-right view-link"><a href="{% url 'view_spl_sessions' %}">View All Sessions</a></span>
+          </div>
+        </div>
+      </div>
+      <div class="dash-circle">
+        <div class="row">
+          {% for spl_session in spl_sessions %}
+          <div class="col-12 col-lg-6 col-xl-6 dash-widget3">
+            <div class="card-body dash-widget1">
+              <div class=" d-flex align-items-center justify-content-between" >
+                <img class="w-50" src="{% static 'assets/img/profiles/book_icon.png' %}" />
+                {% comment %} <div class="circle-graph2" data-percent="20">
+                  <b>20%</b>
+                </div> {% endcomment %}
+                
+              </div>
+              <div class="dash-details">
+                <h4>{{spl_session.title}}</h4>
+                <ul>
+                  <li><i class="fas fa-clock"></i> {{spl_session.start_time|date:"h:i A"}} - {{spl_session.end_time|date:"h:i A"}}</li>
+                  <li><i class="fas fa-calendar-day"></i> {{spl_session.start_time|date:"d M Y"}}</li>
+                  <li><i class="fas fa-microphone"></i> {{spl_session.speaker}}</li>
+                  <li><i class="fas fa-hourglass-end"></i> {{spl_session.duration}} Minutes</li>
+                  <li><i class="fas fa-map-marker-alt"></i> {{spl_session.location}}</li>
+                </ul>
+                  
+                </div>
+              </div>
+            </div>
+            {% endfor %} 
+          </div>
+        </div>
+      </div> 
+  <div class="row" >
+  <div class="col-12 col-lg-12 col-xl-8 d-flex overflow-auto h-100">
+  <div class="card flex-fill">
+  <div class="card-header bg-info-light">
+  <div class="row align-items-center">
+  <div class="col-6">
+  <h5 class="card-title  font-weight-bold ">Happenings At PreSchool</h5>
+  </div>
+  
+  </div>
+  </div>
+  {% comment %} <div class="card-body"> {% endcomment %}
+  
+    {% comment %} <div class="card shadow rounded-3"> {% endcomment %}
+      
+      <div class="card-body" style="max-height: 500px; overflow-y: auto;">
+        <ul class="list-group list-group-flush">
+          {% for happening in happenings %}
+          <li class="list-group-item d-flex align-items-start">
+            <div class="me-2 border-start border-success border-4"></div>
+            <p class="mb-0">{{happening.message}}</p>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    {% comment %} </div> {% endcomment %}
+    
+  
+  {% comment %} </div> {% endcomment %}
+  </div>
+  </div>
+  <div class="col-12 col-lg-12 col-xl-4 d-flex">
+  <div class="card flex-fill">
+  <div class="card-header bg-info-light">
+  <h5 class="card-title font-weight-bold">Events Log</h5>
+  </div>
+  <div class="card-body">
+  <div class="teaching-card">
+  <ul class="activity-feed">
+  {% for event in events %}
+  <li class="feed-item">
+  <div class="feed-date1">{{event.start_time|date:"M d, h A"}}-{{event.end_time|date:"M d, h A"}}</div>
+  <span class="feed-text1"><a>{{event.title}}</a></span>
+  {% if event.status == "Active" %}
+  <p><span class="text-white badge badge-success">{{event.status}}</span></p>
+  {% elif event.status == "Completed" %}
+  <p><span class="text-white badge badge-danger">{{event.status}}</span></p>
+  {% else %}
+  <p><span class="text-white badge badge-primary">{{event.status}}</span></p>
+  {% endif %}
+  </li>
+  
+  {% endfor %}
+  
+  </ul>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  <div class="col-12 col-lg-12 col-xl-3 d-flex">
+  <div class="card flex-fill">
+  <div class="card-header bg-info-light">
+  <div class="row align-items-center">
+  <div class="col-12">
+  <h5 class="card-title font-weight-bold">Calendar</h5>
+  </div>
+  </div>
+  </div>
+  <div class="card-body body d-flex flex-wrap gap-4">
+  <div id="calendar-doctor" class="calendar-container"></div>
+  <div class="calendar-info calendar-info1">
+    {% if not is_holiday %}
+  <div class="calendar-details">
+  <p>09 am</p>
+  <h6 class="calendar-blue d-flex justify-content-between align-items-center">Lecture 1 <span>09am - 10pm</span></h6>
+  </div>
+  <div class="calendar-details">
+  <p>10 am</p>
+  <h6 class="calendar-violet d-flex justify-content-between align-items-center">Lecture 2 <span>10am - 11am</span></h6>
+  </div>
+  <div class="calendar-details">
+  <p>11 am</p>
+  <h6 class="calendar-red d-flex justify-content-between align-items-center">Break <span>11am - 11.30am</span></h6>
+  </div>
+  <div class="calendar-details">
+  <p>12 pm</p>
+  <h6 class="calendar-orange d-flex justify-content-between align-items-center">Lecture 3 <span>11.30am - 12pm</span></h6>
+  </div>
+  <div class="calendar-details">
+  <p>09 am</p>
+  <h6 class="calendar-blue d-flex justify-content-between align-items-center">Lecture 4 <span>12pm - 01pm</span></h6>
+  </div>
+  {% endif %}
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  
+  </div>
+
+  <div class="container my-4">
+    <div class="card shadow">
+      <div class="card-header bg-info-light text-white">
+        <h5 class="mb-0 font-weight-bold">📢 Announcements</h5>
+      </div>
+      <ul class="list-group" style="max-height: 600px; overflow-y: auto;">
+        {% for announcement in announcements %}
+        <li class="list-group-item d-flex justify-content-between align-items-start">
+          <div>
+            <strong class="fw-bold">{{ announcement.title }}</strong>
+            <br/>
+            <small class="text-muted">Posted on {{ announcement.created_at|date:"M d, Y" }}</small>
+            <br/>
+            {% comment %} <hr/> {% endcomment %}
+            <p class="mb-1">{{ announcement.content|linebreaksbr }}</p>
+          </div>
+          {% if announcement.is_important %}
+            <span class="badge bg-danger rounded-pill">Important</span>
+          {% endif %}
+        </li>
+        {% empty %}
+        <li class="list-group-item text-muted">No announcements available.</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+
+  {% comment %} <div style="max-height: 300px; overflow-y: auto;">
+    <ul class="list-group list-group-flush">
+      {% for announcement in announcements %}
+      <li class="list-group-item d-flex justify-content-between align-items-start">
+        <div>
+          <strong class="fw-bold">{{ announcement.title }}</strong>
+          <br/>
+          <small class="text-muted">Posted on {{ announcement.created_at|date:"M d, Y" }}</small>
+          <br/>
+          <p class="mb-1">{{ announcement.content|linebreaksbr }}</p>
+        </div>
+        {% if announcement.is_important %}
+          <span class="badge bg-danger rounded-pill">Important</span>
+        {% endif %}
+      </li>
+      {% empty %}
+      <li class="list-group-item text-muted">No announcements available.</li>
+      {% endfor %}
+    </ul>
+  </div> {% endcomment %}
+  
+  
+  <footer>
+  <p>Copyright © 2025 Dreamguys.</p>
+  </footer>
+  
+  </div>
+  
+  </div>
+  
+  <script src="{% static 'assets/js/jquery-3.6.0.min.js' %}"></script>
+  <script src="{% static 'assets/js/popper.min.js' %}"></script>
+  <script src="{% static 'assets/plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'assets/plugins/slimscroll/jquery.slimscroll.min.js' %}"></script>
+  <script src="{% static 'assets/plugins/apexchart/apexcharts.min.js' %}"></script>
+  <script src="{% static 'assets/plugins/apexchart/chart-data.js' %}"></script>
+  <script src="{% static 'assets/plugins/simple-calendar/jquery.simple-calendar.js' %}"></script>
+  <script src="{% static 'assets/js/calander.js' %}"></script>
+  <script src="{% static 'assets/js/circle-progress.min.js' %}"></script>
+  <script src="{% static 'assets/js/script.js' %}"></script>
+  </body>
+  
+  <!-- Mirrored from preschool.dreamguystech.com/html-template/student-dashboard.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 28 Oct 2021 11:11:43 GMT -->
+  </html>
+
+  {% elif  user.role == "teacher" %}
+  <div class="page-wrapper">
+    <div class="content container-fluid">
+    
+    <div class="page-header">
+    <div class="row">
+    <div class="col-sm-12">
+    <h3 class="page-title">Welcome {{user.first_name}}!</h3>
+    <ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+    <li class="breadcrumb-item active">Teacher Dashboard</li>
+    </ul>
+    </div>
+    </div>
+    </div>
+    
+    
+    <div class="row">
+    <div class="col-xl-3 col-sm-6 col-12 d-flex">
+    <div class="card bg-five w-100">
+    <div class="card-body">
+    <div class="db-widgets d-flex justify-content-around align-items-center">
+    <div class="db-icon">
+    <i class="fas fa-chalkboard"></i>
+    </div>
+    <div class="db-info">
+    <h3>{{today_lec_count}}/4</h3>
+    <h6>Lectures Today</h6>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    <div class="col-xl-3 col-sm-6 col-12 d-flex">
+    <div class="card bg-six w-100">
+    <div class="card-body">
+    <div class="db-widgets d-flex justify-content-around align-items-center">
+    <div class="db-icon">
+    <i class="fas fa-user-graduate"></i>
+    </div>
+    <div class="db-info">
+    <h3>{{student_count}}</h3>
+    <h6>Students</h6>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    <div class="col-xl-3 col-sm-6 col-12 d-flex">
+    <div class="card bg-seven w-100">
+    <div class="card-body">
+    <div class="db-widgets d-flex justify-content-around align-items-center">
+    <div class="db-icon">
+    <i class="fas fa-book-open"></i>
+    </div>
+    <div class="db-info">
+    <h3>{{teacher_count}}</h3>
+    <h6>Teachers</h6>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    <div class="col-xl-3 col-sm-6 col-12 d-flex">
+    <div class="card bg-eight w-100">
+    <div class="card-body">
+    <div class="db-widgets d-flex justify-content-between align-items-center">
+    <div class="db-icon">
+    <i class="fas fa-clock"></i>
+    </div>
+    <div class="db-info">
+    <h3>15/20</h3>
+    <h6>Total Hours</h6>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    
+    
+    <div class="row">
+    <div class="col-12 col-lg-12 col-xl-9">
+    <div class="row">
+    <div class="col-12 col-lg-8 col-xl-8 d-flex">
+    <div class="card flex-fill">
+    <div class="card-header">
+    <div class="row align-items-center">
+    <div class="col-6">
+    <h5 class="card-title">Upcoming Lessons</h5>
+    </div>
+    <div class="col-6">
+    <span class="float-right view-link"><a href="{% url 'view_lessons' %}">View All Lessons</a></span>
+    </div>
+    </div>
+    </div>
+    <div class="pt-3 pb-3">
+    <div class="table-responsive lesson">
+    <table class="table table-center">
+    <tbody>
+      {% comment %} <tr>asgsag</tr> {% endcomment %}
+      {% comment %} {% if not is_holiday %} {% endcomment %}
+      {% for lesson in teacher_lessons %}
+    <tr>
+      
+    <td>
+    <div class="date">
+    <b>{{lesson.lec_date|date:"M, d"}}, {{lesson.lec_date|date:"D"}}</b>
+    <p>{{lesson.lec_start_time|date:"h:i A"}} - {{lesson.lec_end_time|date:"h:i A"}} ({{lesson.duration}}min)</p>
+    </div>
+    </td>
+    <td>
+    <div class="date">
+    <b>{{teacher.teacher_responsibility.teacher_subj}}</b>
+    <p>{{lesson.lec_class}}-{{lesson.lec_section}}</p>
+    </div>
+    </td>
+    {% comment %} <td><a href="#">Confirmed</a></td> {% endcomment %}
+    <td><a href="{% url 'edit_lesson' lesson.slug %}" class="btn btn-info text-white">Reschedule</a></td>
+    </tr>
+    {% endfor %}
+    {% comment %} {% endif %} {% endcomment %}
+    
+    </tbody>
+    </table>
+    </div>
+    </div>
+    </div>
+    </div>
+    <div class="col-12 col-lg-4 col-xl-4 d-flex">
+    <div class="card flex-fill">
+    <div class="card-header">
+    <div class="row align-items-center">
+    <div class="col-12">
+    <h5 class="card-title">Semester Progress</h5>
+    </div>
+    </div>
+    </div>
+    <div class="dash-widget">
+    <div class="circle-bar circle-bar1">
+    <div class="circle-graph1" data-percent="{{sem_progress}}">
+    <b>{{sem_progress}}%</b>
+    </div>
+    </div>
+    <div class="dash-info">
+    <h6>Lesson Progressed</h6>
+    <h4>{{lesson_count}} <span>/ 80</span></h4>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    <div class="row" >
+      <div class="col-12 col-lg-12 col-xl-8 d-flex overflow-auto h-100">
+      <div class="card flex-fill">
+      <div class="card-header bg-info-light">
+      <div class="row align-items-center">
+      <div class="col-6">
+      <h5 class="card-title  font-weight-bold ">Happenings At PreSchool</h5>
+      </div>
+      
+      </div>
+      </div>
+      {% comment %} <div class="card-body"> {% endcomment %}
+      
+        {% comment %} <div class="card shadow rounded-3"> {% endcomment %}
+          
+          <div class="card-body" style="max-height: 500px; overflow-y: auto;">
+            <ul class="list-group list-group-flush">
+              {% for happening in happenings %}
+              <li class="list-group-item d-flex align-items-start">
+                <div class="me-2 border-start border-success border-4"></div>
+                <p class="mb-0">{{happening.message}}</p>
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% comment %} </div> {% endcomment %}
+        
+      
+      {% comment %} </div> {% endcomment %}
+      </div>
+      </div>
+    <div class="col-12 col-lg-6 col-xl-4 d-flex">
+    <div class="card flex-fill">
+    <div class="card-header">
+     <h5 class="card-title">Teaching History</h5>
+    </div>
+    <div class="card-body">
+    <div class="teaching-card">
+    <ul class="activity-feed">
+      {% for entry in teaching_log %}
+    <li class="feed-item">
+    <div class="feed-date1">{{entry.lec_date|date:"M d"}}, {{entry.lec_start_time|date:"h:i A"}} - {{entry.lec_end_time|date:"h:i A"}} ({{entry.duration}}min)</div>
+    <span class="feed-text1"><a>{{entry.lec_class}}-{{entry.lec_section}}</a></span>
+    {% if entry.status == "In Progress" %}
+    <p><span class="text-white badge badge-success">{{entry.status}}</span></p>
+    {% elif entry.status == "Completed"%}
+    <p><span class="text-white badge badge-danger">{{entry.status}}</span></p>
+    {% else %}
+    <p><span class="text-white badge badge-primary">{{entry.status}}</span></p>
+    {% endif %}
+    </li>
+    {% endfor %}
+    {% comment %} <li class="feed-item">
+    <div class="feed-date1">Sep 04, 2 pm - 3 pm (70min)</div>
+    <span class="feed-text1"><a>Et dolore magna</a></span>
+    <p>Completed</p>
+    </li>
+    <li class="feed-item">
+    <div class="feed-date1">Sep 02, 1 pm - 2 am (80min)</div>
+    <span class="feed-text1"><a>Exercitation ullamco</a></span>
+    <p>Completed</p>
+    </li>
+    <li class="feed-item">
+    <div class="feed-date1">Aug 30, 10 am - 12 pm (90min)</div>
+    <span class="feed-text1"><a>Occaecat cupidatat</a></span>
+    <p>Completed</p>
+    </li> {% endcomment %}
+    </ul>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    <div class="col-12 col-lg-12 col-xl-3 d-flex">
+    <div class="card flex-fill">
+    <div class="card-header">
+    <div class="row align-items-center">
+    <div class="col-12">
+    <h5 class="card-title">Calendar</h5>
+    </div>
+    </div>
+    </div>
+    <div class="card-body body d-flex flex-wrap gap-4">
+    <div id="calendar-doctor" class="calendar-container"></div>
+    <div class="calendar-info calendar-info1">
+      {% for lec in today_lec %}
+      {% if lec.lec_start_time|date:"h:i A" != "11:00" %}
+    <div class="calendar-details">
+      <p>{{lec.lec_start_time|date:"h:i A"}}</p>
+      <h6 class="calendar-blue d-flex justify-content-between align-items-center">{{lec.lec_class}} {{lec.lec_section}} <span>{{lec.lec_start_time|date:"h:i A"}} - {{lec.lec_end_time|date:"h:i A"}}</span></h6>
+    </div>
+      {% endif %}
+    {% endfor %}
+    
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    
+    </div>
+    
+    <footer>
+    <p>Copyright © 2025 Dreamguys.</p>
+    </footer>
+    
+    </div>
+    
+    </div>
+    {% comment %} {{ months|json_script:"months-data" }}
+    {{ monthly_lec_count|json_script:"lesson-counts-data" }}
+
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+    <script>
+      const months = JSON.parse(document.getElementById('months-data').textContent);
+      const lessonCounts = JSON.parse(document.getElementById('lesson-counts-data').textContent);
+
+      var options = {
+        chart: {
+          type: 'area',
+          height: 350
+        },
+        series: [{
+          name: 'Lectures Taken',
+          data: months
+        }],
+        xaxis: {
+          categories: lessonCounts
+        },
+        stroke: {
+          curve: 'smooth'
+        },
+        dataLabels: {
+          enabled: false
+        },
+        title: {
+          text: 'Monthly Teaching Activity',
+          align: 'left'
+        }
+      };
+
+      var chart = new ApexCharts(document.querySelector("#apexcharts-area"), options);
+      chart.render();
+    </script> {% endcomment %}
+
+
+    
+    
+    <script src="{% static 'assets/js/jquery-3.6.0.min.js' %}"></script>
+    
+    <script src="{% static 'assets/js/popper.min.js' %}"></script>
+    <script src="{% static 'assets/plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+    
+    <script src="{% static 'assets/plugins/slimscroll/jquery.slimscroll.min.js' %}"></script>
+    
+    <script src="{% static 'assets/plugins/apexchart/apexcharts.min.js' %}"></script>
+    <script src="{% static 'assets/plugins/apexchart/chart-data.js' %}"></script>
+    
+    <script src="{% static 'assets/plugins/simple-calendar/jquery.simple-calendar.js' %}"></script>
+    <script src="{% static 'assets/js/calander.js' %}"></script>
+    
+    <script src="{% static 'assets/js/circle-progress.min.js' %}"></script>
+    
+    <script src="{% static 'assets/js/script.js' %}"></script>
+    </body>
+    
+    <!-- Mirrored from preschool.dreamguystech.com/html-template/teacher-dashboard.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 28 Oct 2021 11:11:43 GMT -->
+    </html>
+
+
+    {% else %}
+  
+    <button><a href="{% url 'logout' %}">Sign Out</a></button> 
+{% endif %}
+{% endblock %} 

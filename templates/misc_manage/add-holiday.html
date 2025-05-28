@@ -1,0 +1,93 @@
+{% extends "home/base.html" %}
+{% load static %}
+{% block body %}
+
+<div class="page-wrapper">
+<div class="content container-fluid">
+
+<div class="page-header">
+<div class="row align-items-center">
+<div class="col">
+<h3 class="page-title">Add Holiday</h3>
+<ul class="breadcrumb">
+<li class="breadcrumb-item"><a href="{% url 'holiday_list' %}">Holiday</a></li>
+<li class="breadcrumb-item active">Add Holiday</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div class="row">
+<div class="col-sm-12">
+<div class="card">
+<div class="card-body">
+<form method="POST" action="{% url 'add_holiday' %}" enctype="multipart/form-data">
+  {% csrf_token %}
+<div class="row">
+<div class="col-12">
+<h5 class="form-title"><span>Holiday Information</span></h5>
+</div>
+<div class="col-12 col-sm-6">
+<div class="form-group">
+<label>Holiday Id</label>
+<input type="text" name = "holiday_id" class="form-control" required>
+</div>
+</div>
+<div class="col-12 col-sm-6">
+<div class="form-group">
+<label>Holiday Name</label>
+<input type="text" name ="holiday_name" class="form-control" required>
+</div>
+</div>
+<div class="col-12 col-sm-6">
+<div class="form-group">
+<label>Type of Holiday</label>
+<select class="form-control" name="holiday_type" id="exampleFormControlSelect1" required>
+<option value="" selected>Select Holiday</option>
+<option value="Public Holiday">Public Holiday</option>
+<option value="College Holiday">College Holiday</option>
+<option value="Exam Holiday">Exam Holiday</option>
+<option value="Others">Others</option>
+</select>
+</div>
+</div>
+<div class="col-12 col-sm-6">
+<div class="form-group">
+<label>Start Date</label>
+<input type="date" name="holiday_start_date" class="form-control" required>
+</div>
+</div>
+<div class="col-12 col-sm-6">
+<div class="form-group">
+<label>End Date</label>
+<input type="date" name="holiday_end_date" class="form-control" required>
+</div>
+</div>
+<div class="col-12">
+<button type="submit" class="btn btn-primary">Submit</button>
+</div>
+</div>
+</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+
+
+<script src="{% static 'assets/js/jquery-3.6.0.min.js' %}"></script>
+
+<script src="{% static 'assets/js/popper.min.js' %}"></script>
+<script src="{% static 'assets/plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+
+<script src="{% static 'assets/plugins/slimscroll/jquery.slimscroll.min.js' %}"></script>
+
+<script src="{% static 'assets/js/script.js' %}"></script>
+</body>
+
+<!-- Mirrored from preschool.dreamguystech.com/html-template/add-holiday.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 28 Oct 2021 11:12:21 GMT -->
+</html>
+{% endblock  %}
